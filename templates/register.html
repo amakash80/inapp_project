@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Registration - Create an Account{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="left-side">
+        <div class="content">
+            <h2>Unlock Your Potential, Manage Your Growth - Your Training Journey Starts Here!</h2>
+        </div>
+    </div>
+    <div class="right-side">
+        <div class="form-container">
+            <h2>Create An Account</h2>
+            <form>
+                <div class="form-group">
+                    <input type="text" placeholder="Full Name" required>
+                    <select required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                    <input type="text" placeholder="Phone Number" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" placeholder="State Of Domicile" required>
+                    <input type="text" placeholder="City" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="date" id="dob" placeholder="Date of Birth" required>
+                    <input type="text" placeholder="Qualifications" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" placeholder="Password" required>
+                    <input type="password" placeholder="Confirm Password" required>
+                </div>
+                <button type="submit" class="btn">Create Account</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

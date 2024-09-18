@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}
+    User Dashboard
+{% endblock %}
+
+{% block content %}
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Side Menu -->
+        <aside class="side-menu">
+            <ul>
+                <li id="profileMenuItem" class="active"><a href="#">My Profile</a></li>
+                <li id="enquiriesMenuItem"><a href="#">List Enquiries</a></li>
+                <li id="addEnquiryMenuItem"><a href="#">Add Enquiry</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <!-- My Profile Section -->
+            <section id="profile-section">
+                <h2>My Profile</h2>
+                <div class="profile-details">
+                    <p><strong>Name:</strong> Roronoa Zoro</p>
+                    <p><strong>Email:</strong> Marimo@example.com</p>
+                    <p><strong>Phone:</strong> +123456789</p>
+                    <p><strong>Address:</strong> Ship, Sea, Somewhere</p>
+                </div>
+                <div class="profile-actions">
+                    <button id="editProfileBtn" class="edit-profile">Edit Profile</button>
+                    <button id="deleteProfileBtn" class="delete-profile">Delete Profile</button>
+                </div>
+            </section>
+
+            <!-- List Enquiries Section -->
+            <section id="enquiries-section" style="display: none;">
+                <h2>List of Enquiries</h2>
+                <table class="enquiries-table">
+                    <thead>
+                        <tr>
+                            <th>Serial Number</th>
+                            <th>Course</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Java</td>
+                            <td>2024-09-01</td>
+                            <td>Pending</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Python</td>
+                            <td>2024-09-02</td>
+                            <td>Approved</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Add Enquiry Section -->
+            <section id="add-enquiry-section" style="display: none;">
+                <form id="addEnquiryForm">
+                    <label for="highestQualification">Highest Qualification:</label>
+                    <input type="text" id="highestQualification" name="highestQualification" required />
+
+                    <label for="percentageMarks">Percentage of Marks Obtained:</label>
+                    <input type="text" id="percentageMarks" name="percentageMarks" required />
+
+                    <label for="yearOfGraduation">Year of Graduation:</label>
+                    <input type="text" id="yearOfGraduation" name="yearOfGraduation" required />
+
+                    <label for="enquiredCourse">Enquired Course:</label>
+                    <select id="enquiredCourse" name="enquiredCourse" required>
+                        <option value="">Select a course</option>
+                        <option value="Java">Java</option>
+                        <option value="Python">Python</option>
+                        <option value="C++">C++</option>
+                        <option value="DBMS">DBMS</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Data Structures and Algorithms">Data Structures and Algorithms</option>
+                        <option value="Operating Systems">Operating Systems</option>
+                        <option value="Cyber Security">Cyber Security</option>
+                        <option value="Machine Learning">Machine Learning</option>
+                    </select>
+
+                    <label for="source">From Where Did You Hear About Us?</label>
+                    <select id="source" name="source" required>
+                        <option value="">Select an option</option>
+                        <option value="Newspaper or Magazine">Newspaper or Magazine</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Friends">Friends</option>
+                        <option value="Television">Television</option>
+                        <option value="Institutions">Institutions</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <div class="add-enquiry-buttons">
+                        <button type="submit">Submit</button>
+                        <button type="button" id="clearFormBtn">Clear</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Profile</h2>
+            <form id="editProfileForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="John Doe" required><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="johndoe@example.com" required><br><br>
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" value="+123456789" required><br><br>
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" value="1234 Street, City, Country" required><br><br>
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Profile Modal -->
+    <div id="deleteProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Delete Profile</h2>
+            <p>Are you sure you want to delete your profile? This action cannot be undone.</p>
+            <button id="confirmDeleteBtn" class="confirm-delete">Yes, Delete</button>
+            <button class="cancel-delete">Cancel</button>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="{{ url_for('static', filename='js/user.js') }}"></script>
+{% endblock %}

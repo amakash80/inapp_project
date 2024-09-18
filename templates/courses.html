@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Courses{% endblock %}
+
+{% block content %}
+<!-- Courses Section -->
+<section class="courses">
+    <h1 class="course-heading">Join for a course NOW!</h1>
+    <div class="course-grid">
+        <div class="course-card">
+            <img src="{{ url_for('static', filename='images/java.png') }}" alt="Java Course">
+            <h3>Java</h3>
+            <p>Master Java programming with a focus on object-oriented principles. Build robust applications from scratch.</p>
+            <button class="enquiry-btn">Enquire</button>
+            <button class="interested-btn">Interested</button>
+        </div>
+        <div class="course-card">
+            <img src="{{ url_for('static', filename='images/python.png') }}" alt="Python Course">
+            <h3>Python</h3>
+            <p>Learn Python, one of the most versatile and powerful programming languages.</p>
+            <button class="enquiry-btn">Enquire</button>
+            <button class="interested-btn">Interested</button>
+        </div>
+        <div class="course-card">
+            <img src="{{ url_for('static', filename='images/cpp.png') }}" alt="C++ Course">
+            <h3>C++</h3>
+            <p>Deep dive into C++ and improve your coding skills. Learn advanced algorithms and system-level programming.</p>
+            <button class="enquiry-btn">Enquire</button>
+            <button class="interested-btn">Interested</button>
+        </div>
+        <div class="course-card">
+            <img src="{{ url_for('static', filename='images/dbms.jpg') }}" alt="DBMS Course">
+            <h3>DBMS</h3>
+            <p>Learn to design, implement, and manage relational databases using SQL.</p>
+            <button class="enquiry-btn">Enquire</button>
+            <button class="interested-btn">Interested</button>
+        </div>
+        <div class="course-card">
+            <img src="{{ url_for('static', filename='images/webdev.jpg') }}" alt="Web Development Course">
+            <h3>Web Development</h3>
+            <p>Learn to build modern, responsive websites using HTML, CSS, and JavaScript.</p>
+            <button class="enquiry-btn">Enquire</button>
+            <button class="interested-btn">Interested</button>
+        </div>
+        <div class="course-card">
+            <img src="{{ url_for('static', filename='images/dsa.png') }}" alt="Data Structures and Algorithms Course">
+            <h3>Data Structures and Algorithms</h3>
+            <p>Learn how to solve complex problems using data structures and algorithms.</p>
+            <button class="enquiry-btn">Enquire</button>
+            <button class="interested-btn">Interested</button>
+        </div>
+        <div class="course-card">
+            <img src="{{ url_for('static', filename='images/os.jpg') }}" alt="Operating Systems Course">
+            <h3>Operating Systems</h3>
+            <p>Gain in-depth knowledge of operating systems and their functions.</p>
+            <button class="enquiry-btn">Enquire</button>
+            <button class="interested-btn">Interested</button>
+        </div>
+        <div class="course-card">
+            <img src="{{ url_for('static', filename='images/cybersec.jpg') }}" alt="Cyber Security Course">
+            <h3>Cyber Security</h3>
+            <p>Protect and secure systems with advanced cyber security techniques.</p>
+            <button class="enquiry-btn">Enquire</button>
+            <button class="interested-btn">Interested</button>
+        </div>
+        <div class="course-card">
+            <img src="{{ url_for('static', filename='images/ml.jpg') }}" alt="Machine Learning Course">
+            <h3>Machine Learning</h3>
+            <p>Explore the world of machine learning. Learn to build predictive models and work with large datasets.</p>
+            <button class="enquiry-btn">Enquire</button>
+            <button class="interested-btn">Interested</button>
+        </div>
+    </div>
+</section>
+{% endblock %}

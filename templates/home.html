@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Course Inquiry System{% endblock %}
+
+{% block content %}
+    <div class="banner">
+        <img src="{{ url_for('static', filename='images/banner1.jpg') }}" class="active" alt="Banner Image 1">
+        <img src="{{ url_for('static', filename='images/banner2.jpg') }}" alt="Banner Image 2">
+        <img src="{{ url_for('static', filename='images/banner3.jpg') }}" alt="Banner Image 3">
+        <button class="left">&lt;</button>
+        <button class="right">&gt;</button>
+
+        <!-- Login and Sign-Up Buttons within a Box -->
+        <div class="auth-container">
+            <div class="auth-buttons">
+                <button class="login">Sign In as Admin</button>
+                <button class="signup">Sign In as User</button>
+            </div>
+            <a href="{{ url_for('register') }}" class="register-link">Register as new user</a>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+{% endblock %}

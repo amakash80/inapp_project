@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home - Course Inquiry System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Company Logo">
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('courses') }}">Courses</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="content">
+        {% block content %}
+        <!-- Content specific to each page goes here -->
+        {% endblock %}
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Mad Education. All rights reserved.</p>
+    </footer>
+    {% block script %} {% endblock %}
+</body>
+</html>
