@@ -13,8 +13,8 @@
         <!-- Login and Sign-Up Buttons within a Box -->
         <div class="auth-container">
             <div class="auth-buttons">
-                <button class="login">Sign In as Admin</button>
-                <button class="signup">Sign In as User</button>
+                <button class="login"><a href="{{ url_for('login') }}?role=admin" class="btn btn-primary">Sign In as Admin</a></button>
+                <button class="signup"><a href="{{ url_for('login') }}?role=user" class="btn btn-primary">Sign In as User</a></button>
             </div>
             <a href="{{ url_for('register') }}" class="register-link">Register as new user</a>
         </div>

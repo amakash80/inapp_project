@@ -9,6 +9,28 @@ body {
     min-height: 100vh;
     overflow-x: hidden; /* Prevent horizontal scroll */
 }
+/* CSS for flash messages */
+.flash-message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.flash-message.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.flash-message.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.flash-message.fade-out {
+    opacity: 0;
+}
 
 header {
     background-color: #e4e2dd;
@@ -202,7 +224,6 @@ footer p {
 .register-link:hover {
     text-decoration: underline;
 }
-
 
 /* Courses Page (courses.html) - Start */
 
@@ -399,7 +420,7 @@ h3 {
 
 .container {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;  
 }
 
 .left-side {

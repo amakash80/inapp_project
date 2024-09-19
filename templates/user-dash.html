@@ -22,10 +22,20 @@
             <section id="profile-section">
                 <h2>My Profile</h2>
                 <div class="profile-details">
-                    <p><strong>Name:</strong> Roronoa Zoro</p>
-                    <p><strong>Email:</strong> Marimo@example.com</p>
-                    <p><strong>Phone:</strong> +123456789</p>
-                    <p><strong>Address:</strong> Ship, Sea, Somewhere</p>
+                    <p><strong>Name:</strong> {{ user.uname }}</p>
+                    <p><strong>Email:</strong> {{ user.uemail }}</p>
+                    <p><strong>Phone:</strong> {{ user.uphone }}</p>
+                    <p><strong>Date of Birth:</strong> {{ user.udob }}</p>
+                    <p><strong>Gender:</strong> {{ user.ugender }}</p>
+                    <h3>Qualifications:</h3>
+                        <ul>
+                            {% for qualification in qualifications %}
+                                <li>{{ qualification.qualification_type }}</li>
+                            {% else %}
+                                <li>No qualifications added</li>
+                            {% endfor %}
+                        </ul>
+                    <p><strong>Address:</strong> {{ user.ucity }}, {{ user.ustate }}</p>
                 </div>
                 <div class="profile-actions">
                     <button id="editProfileBtn" class="edit-profile">Edit Profile</button>
@@ -114,30 +124,33 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Edit Profile</h2>
-            <form id="editProfileForm">
+            <form id="editProfileForm" method="POST" action="{{ url_for('update_profile') }}">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" value="John Doe" required><br><br>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="johndoe@example.com" required><br><br>
+                <input type="text" id="name" name="name" value="{{ user.uname }}" required><br><br>
                 <label for="phone">Phone:</label>
-                <input type="text" id="phone" name="phone" value="+123456789" required><br><br>
-                <label for="address">Address:</label>
-                <input type="text" id="address" name="address" value="1234 Street, City, Country" required><br><br>
+                <input type="text" id="phone" name="phone" value="{{ user.uphone }}" required><br><br>
+                <label for="address">State:</label>
+                <input type="text" id="state" name="state" value="{{ user.ustate }}" required><br><br>
+                <label for="address">City:</label>
+                <input type="text" id="city" name="city" value="{{ user.ucity }}" required><br><br>
                 <button type="submit">Save Changes</button>
             </form>
         </div>
     </div>
 
     <!-- Delete Profile Modal -->
-    <div id="deleteProfileModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Delete Profile</h2>
-            <p>Are you sure you want to delete your profile? This action cannot be undone.</p>
-            <button id="confirmDeleteBtn" class="confirm-delete">Yes, Delete</button>
-            <button class="cancel-delete">Cancel</button>
-        </div>
+<!-- Delete Profile Modal -->
+<div id="deleteProfileModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Delete Profile</h2>
+        <p>Are you sure you want to delete your profile? This action cannot be undone.</p>
+        <form id="deleteProfileForm" method="POST" action="{{ url_for('delete_profile') }}">
+            <button type="submit" id="confirmDeleteBtn" class="confirm-delete">Yes, Delete</button>
+            <button type="button" class="cancel-delete">Cancel</button>
+        </form>
     </div>
+</div>
 {% endblock %}
 {% block script %}
     <script src="{{ url_for('static', filename='js/user.js') }}"></script>

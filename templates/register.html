@@ -1,50 +1,125 @@
 {% extends 'base.html' %}
 
 {% block title %}Registration - Create an Account{% endblock %}
-
 {% block content %}
 <div class="container">
-    <div class="left-side">
-        <div class="content">
-            <h2>Unlock Your Potential, Manage Your Growth - Your Training Journey Starts Here!</h2>
-        </div>
-    </div>
-    <div class="right-side">
-        <div class="form-container">
-            <h2>Create An Account</h2>
-            <form>
-                <div class="form-group">
-                    <input type="text" placeholder="Full Name" required>
-                    <select required>
-                        <option value="" disabled selected>Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
+    <div class="form-card">
+        <h3>Create an Account</h3>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <form method="POST" action="{{ url_for('register') }}">
+            {{ form.hidden_tag() }}
+            <div class="row">
+                <div class="input-group">
+                    {{ form.firstname.label }}
+                    {{ form.firstname() }}
+                    {% if form.firstname.errors %}
+                        <div class="error">{{ form.firstname.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                <div class="input-group">
+                    {{ form.lastname.label }}
+                    {{ form.lastname() }}
+                    {% if form.lastname.errors %}
+                        <div class="error">{{ form.lastname.errors[0] }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="input-group">
+                    {{ form.birthday.label }}
+                    {{ form.birthday() }}
+                    {% if form.birthday.errors %}
+                        <div class="error">{{ form.birthday.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                <div class="input-group">
+                    {{ form.gender.label }}
+                    {{ form.gender() }}
+                    {% if form.gender.errors %}
+                        <div class="error">{{ form.gender.errors[0] }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group">
+                    {{ form.email.label }}
+                    {{ form.email() }}
+                    {% if form.email.errors %}
+                        <div class="error">{{ form.email.errors[0] }}</div>
+                    {% endif %}
                 </div>
 
-                <div class="form-group">
-                    <input type="email" placeholder="Email" required>
-                    <input type="text" placeholder="Phone Number" required>
+                <div class="input-group">
+                    {{ form.phone.label }}
+                    {{ form.phone() }}
+                    {% if form.phone.errors %}
+                        <div class="error">{{ form.phone.errors[0] }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group">
+                    {{ form.state.label }}
+                    {{ form.state() }}
+                    {% if form.state.errors %}
+                        <div class="error">{{ form.state.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                <div class="input-group">
+                    {{ form.city.label }}
+                    {{ form.city() }}
+                    {% if form.city.errors %}
+                        <div class="error">{{ form.city.errors[0] }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group">
+                    {{ form.qualifications.label }}
+                    {{ form.qualifications() }}
+                    {% if form.qualifications.errors %}
+                        <div class="error">{{ form.qualifications.errors[0] }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group">
+                    {{ form.password.label }}
+                    {{ form.password() }}
+                    {% if form.password.errors %}
+                        <div class="error">{{ form.password.errors[0] }}</div>
+                    {% endif %}
                 </div>
 
-                <div class="form-group">
-                    <input type="text" placeholder="State Of Domicile" required>
-                    <input type="text" placeholder="City" required>
+                <div class="input-group">
+                    {{ form.confirmpassword.label }}
+                    {{ form.confirmpassword() }}
+                    {% if form.confirmpassword.errors %}
+                        <div class="error">{{ form.confirmpassword.errors[0] }}</div>
+                    {% endif %}
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <input type="date" id="dob" placeholder="Date of Birth" required>
-                    <input type="text" placeholder="Qualifications" required>
-                </div>
-
-                <div class="form-group">
-                    <input type="password" placeholder="Password" required>
-                    <input type="password" placeholder="Confirm Password" required>
-                </div>
-                <button type="submit" class="btn">Create Account</button>
-            </form>
-        </div>
+            <div class="input-group">
+                <button type="submit">Register</button>
+            </div>
+        </form>
     </div>
 </div>
+{% endblock %}
+{% block script %}
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
 {% endblock %}
