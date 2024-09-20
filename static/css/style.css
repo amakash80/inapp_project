@@ -350,47 +350,113 @@ footer p {
 
 
 /*Contact Us - Start*/
-.card {
-    border-radius: 15px;
-    margin-top: 0;
-    margin-bottom: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card-body img {
-    height: 500px;
-    width: 500px;
-    padding: 20px;
+.contact-image {
+   
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    line-height: 2;
+    color: #ffffff; /* White text color for contrast */
+    background-image: url('../images/banner3.jpg'); /* Apply the background image */
+    opacity: 60;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Ensures the background image stays fixed when scrolling */
+    background-repeat: no-repeat;
+    display: flex;
     
 }
+.contact-container {
+    display: flex;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin-left: 300px;
+    margin-top: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 670px;
+}
 
-#contact-image {
-  object-fit: cover;
+.contact-info {
+    
+    color: white;
+    padding: 40px;
+    flex: 1;
+}
+
+.contact-info h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.contact-info p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.contact-info ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.contact-info ul li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.contact-info .social-icons a {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    margin-right: 15px;
+    color: white;
+    text-decoration: none;
 }
 
 .contact-form {
-    background-color: #ffffff;
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    border-radius: 0 15px 15px 0;
+    padding: 40px;
+    flex: 1;
+    
 }
 
-.form-control{
-    font-size: 1.2em;
-    padding:15px;
-    width:100%;
-    margin-bottom: 15px;
+.contact-form form {
+    display: flex;
+    flex-direction: column;
 }
-h3 {
+
+.contact-form label {
+    margin-bottom: 10px;
     font-weight: bold;
-    color: #333;
-    margin-bottom: 1.5rem;
 }
 
-.btn-dark {
-    background-color: #333;
-    border-color: #333;
+.contact-form input, .contact-form textarea {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.contact-form textarea {
+    resize: none;
+    height: 150px;
+}
+
+.contact-form button {
+    padding: 15px;
+    background-color:#343dc0;
+    color: rgb(252, 249, 249);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #c1daf6;;
 }
 
 /*Contact us(contactus.html) - end*/
