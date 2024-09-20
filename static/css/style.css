@@ -782,88 +782,96 @@ form button:hover {
     color: #fff;
 }
 
+/* ADMIN DASHBOARD */
+.admin-container {
+    display: flex;
+    flex: 1;
+    min-height: calc(100vh - 80px); /* Adjust height to consider header and footer */
+}
 
-/*ADMIN DASHBOARD*/
-/*Admin- Recent Enquiries (layout styles are taken from user dashboard)*/
-#recent-enquiries-section {
-    background-color: #fff;
+/* Sidebar */
+.admin-sidebar {
+    width: 250px;
+    background-color: #343dc0;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-#recent-enquiries-section h2 {
-    color: #343dc0;
+.admin-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.admin-menu-item {
     margin-bottom: 20px;
-    font-size: 24px;
-}
-/* Style for the "View More" button */
-#viewMoreBtn {
-    background-color: #007bff; /* Button background color */
-    border: none;              /* No border */
-    padding: 10px 20px;        /* Padding for the button */
-    cursor: pointer;           /* Pointer cursor on hover */
-    border-radius: 5px;        /* Rounded corners */
-    margin-top: 20px;          /* Space above the button */
-    display: block;            /* Full width button */
-    width: 150px;              /* Button width */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
-#viewMoreBtn a{
+.admin-menu-item a {
+    color: #fff;
     text-decoration: none;
-    color: white;   /* Button text color */
-    font-size: 16px;  /* Text size */
-    text-align: center;        /* Center text */  
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
 }
 
-/* Hover effect for the button */
-#viewMoreBtn:hover {
-    background-color: #0056b3; /* Darker background on hover */
+.admin-menu-item a:hover,
+.admin-menu-item.active a {
+    background-color: #9bc400;
+    color: #fff;
 }
 
-/* Button focus state */
-#viewMoreBtn:focus {
-    outline: none; /* Remove default focus outline */
-    box-shadow: 0 0 5px #007bff; /* Custom focus outline */
+/* Main Content Area */
+.admin-content {
+    flex: 1;
+    padding: 40px;
+    background-color: #f4f4f4;
 }
 
-/*admin-viewEnquiries*/
-/* Style for the search box */
-/* Container for the search input and icon */
-.search-container {
-    position: relative;
-    display: inline-block;
+/* Tables */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed;  /* Ensure cells don't grow beyond their width */
+    overflow-x: auto;     /* Allow horizontal scrolling if necessary */
 }
 
-/* Style for the search icon */
-.search-icon {
-    position: absolute;
-    top: 39%;
-    left: 12px;
-    transform: translateY(-50%);
-    width: 28px; /* Adjust the size of the icon */
-    height: 28px;
-    /* pointer-events: none; Prevent clicking the icon */
+/* Table cells and headers */
+.admin-table th, .admin-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    word-wrap: break-word;  /* Enable text wrapping within cells */
+    white-space: normal;    /* Prevent long text from overflowing */
+    overflow-wrap: break-word;  /* Ensure long words are broken into multiple lines */
 }
 
-/* Style for the search box */
-#searchInput {
-    width: 300px;
-    padding: 10px 20px 10px 60px; /* Extra padding on the left for the search icon */
-    border-radius: 25px; /* Rounded corners */
-    border: 1px solid #ccc; /* Light border */
-    font-size: 16px;
-    outline: none;
-    transition: border-color 0.3s ease;
+/* Ensure the table header styling remains consistent */
+.admin-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: center;
 }
 
-#searchInput:focus {
-    border-color: #007bff; /* Blue border when focused */
+/* Alternating row background */
+.admin-table tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
-/* Adding some margin to position the search bar */
-#searchInput {
-    margin-bottom: 20px;
+/* Highlight row on hover */
+.admin-table tr:hover {
+    background-color: #ddd;
+}
+
+/* Table cell alignment */
+.admin-table td {
+    text-align: center;
+}
+
+/* Optional: To ensure the table fits within the window */
+.table-container {
+    max-width: 100%;
+    overflow-x: auto;
 }
 

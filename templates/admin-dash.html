@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="admin-logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Display flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="admin-container">
+        <aside class="admin-sidebar">
+            <ul class="admin-menu">
+                <li class="admin-menu-item"><a href="{{ url_for('latest_enquiries') }}">Latest Enquiries</a></li>
+                <li class="admin-menu-item"><a href="{{ url_for('all_enquiries') }}">All Enquiries</a></li>
+                <li class="admin-menu-item"><a href="{{ url_for('all_users') }}">All Users</a></li>
+                <li class="admin-menu-item"><a href="{{ url_for('all_courses') }}">All Courses</a></li>
+                <li class="admin-menu-item"><a href="{{ url_for('disable_qualifications') }}">Disable Qualifications</a></li>
+            </ul>
+        </aside>
+
+        <main class="admin-content">
+            {% block content %}
+            <!-- Admin dashboard content will be injected here -->
+            {% endblock %}
+        </main>
+    </div>
+    <footer>
+        <p>&copy; 2024 Mad Education. All rights reserved.</p>
+    </footer>
+    {% block script %} {% endblock %}
+</body>
+</html>

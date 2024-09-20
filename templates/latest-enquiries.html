@@ -1,0 +1,61 @@
+{% extends 'admin-dash.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+    <h2>Latest Enquiries</h2>
+
+    <table class="admin-enquiries-table">
+        <thead>
+            <tr>
+                <th>Enquirer Name</th>
+                <th>Course Enquired</th>
+                <th>Highest Qualification</th>
+                <th>Marks</th>
+                <th>Year of Graduation</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Placeholder data for now -->
+            <tr>
+                <td>John Doe</td>
+                <td>Computer Science</td>
+                <td>Bachelor's Degree</td>
+                <td>85%</td>
+                <td>2021</td>
+                <td>123 Main Street, City</td>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>Business Administration</td>
+                <td>Master's Degree</td>
+                <td>78%</td>
+                <td>2019</td>
+                <td>456 Elm Street, Town</td>
+            </tr>
+            <tr>
+                <td>Michael Johnson</td>
+                <td>Electrical Engineering</td>
+                <td>Diploma</td>
+                <td>92%</td>
+                <td>2020</td>
+                <td>789 Pine Road, Village</td>
+            </tr>
+            <tr>
+                <td>Alice Williams</td>
+                <td>Psychology</td>
+                <td>PhD</td>
+                <td>88%</td>
+                <td>2018</td>
+                <td>321 Oak Avenue, Metropolis</td>
+            </tr>
+            <tr>
+                <td>David Brown</td>
+                <td>Mechanical Engineering</td>
+                <td>Bachelor's Degree</td>
+                <td>80%</td>
+                <td>2022</td>
+                <td>654 Maple Street, Suburb</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
