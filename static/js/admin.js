@@ -102,3 +102,13 @@ function openEditCourseModal(course) {
 function closeEditCourseModal() {
     document.getElementById('editCourseModal').style.display = 'none';
 }
+
+function openStatusModal(enquiryId) {
+    document.getElementById('enquiry_id').value = enquiryId;
+    document.getElementById('statusUpdateModal').style.display = 'block';
+}
+
+function closeStatusModal() {
+    document.getElementById('statusUpdateModal').style.display = 'none';
+}
+

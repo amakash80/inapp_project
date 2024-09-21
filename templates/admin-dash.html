@@ -8,10 +8,13 @@
 </head>
 <body>
     <header>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Company Logo">
         <nav>
-            <div class="admin-logo">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
-            </div>
+            <ul>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% endif %}
+            </ul>
         </nav>
     </header>
     
@@ -30,7 +33,7 @@
         <aside class="admin-sidebar">
             <ul class="admin-menu">
                 <li class="admin-menu-item"><a href="{{ url_for('latest_enquiries') }}">Latest Enquiries</a></li>
-                <li class="admin-menu-item"><a href="{{ url_for('all_enquiries') }}">All Enquiries</a></li>
+                <li class="admin-menu-item"><a href="{{ url_for('admin_all_enquiries') }}">All Enquiries</a></li>
                 <li class="admin-menu-item"><a href="{{ url_for('all_users') }}">All Users</a></li>
                 <li class="admin-menu-item"><a href="{{ url_for('all_courses') }}">All Courses</a></li>
                 <li class="admin-menu-item"><a href="{{ url_for('disable_qualifications') }}">Disable Qualifications</a></li>

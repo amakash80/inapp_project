@@ -2,9 +2,13 @@
 
 {% block title %}Registration - Create an Account{% endblock %}
 {% block content %}
-<div class="container">
-    <div class="form-card">
-        <h3>Create an Account</h3>
+<div class="registration-image">
+    <div class="container">
+        <div class="left-reg">
+            <br><br><br><br><br><br>
+            <h2>Transform your learning experience with Mad Edutech.</h2>
+            <p>Register now and lead the way!</p>
+        </div>
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <div class="flash-messages">
@@ -14,6 +18,8 @@
                 </div>
             {% endif %}
         {% endwith %}
+        <div class="form-card">
+            <h3>Create an Account</h3>
         <form method="POST" action="{{ url_for('register') }}">
             {{ form.hidden_tag() }}
             <div class="row">
@@ -32,7 +38,7 @@
                     {% endif %}
                 </div>
             </div>
-            
+                
             <div class="row">
                 <div class="input-group">
                     {{ form.birthday.label }}
@@ -85,15 +91,24 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="input-group">
-                    {{ form.qualifications.label }}
-                    {{ form.qualifications() }}
-                    {% if form.qualifications.errors %}
-                        <div class="error">{{ form.qualifications.errors[0] }}</div>
-                    {% endif %}
+<!-- Qualifications Checkbox Section -->
+<div class="row">
+    <div class="input-group">
+        <label for="qualifications">Qualifications:</label>
+        <div class="checkbox-group">
+            {% for value, label in form.qualifications.choices %}
+                <div class="checkbox-container">
+                    <input type="checkbox" name="qualifications" value="{{ value }}"
+                           {% if form.qualifications.data and value in form.qualifications.data %} checked {% endif %}>
+                    {{ label }}
                 </div>
-            </div>
+            {% endfor %}
+        </div>
+        {% if form.qualifications.errors %}
+            <div class="error">{{ form.qualifications.errors[0] }}</div>
+        {% endif %}
+    </div>
+</div>
 
             <div class="row">
                 <div class="input-group">
@@ -117,6 +132,7 @@
                 <button type="submit">Register</button>
             </div>
         </form>
+        </div>
     </div>
 </div>
 {% endblock %}

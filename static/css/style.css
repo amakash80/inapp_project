@@ -225,6 +225,242 @@ footer p {
     text-decoration: underline;
 }
 
+/*LogIn page (login.html)- start*/
+.login-page {
+    background-image: url('/static/images/register.jpg'); /* Ensure the path is correct */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Make it relative to the viewport */
+    padding-bottom: 60px; /* Add padding to avoid form overlap with footer */
+    margin: 0;
+}
+
+/* Dark overlay to improve readability */
+.login-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for better readability */
+    z-index: -1; /* Ensure it stays behind the form */
+}
+
+/* Styling the form container specific to login page */
+.login-page form {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    max-width: 380px;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Styling for form fields inside the login page */
+.login-page .logform-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Styling for form labels */
+.login-page .logform-group .form-label {
+    font-size: 16px;
+    color: #333; /* Darker label text for readability */
+    text-align: left;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Styling for input fields */
+.login-page .logform-group .form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Button styling specific to login page */
+.login-page button.logbtn-primary {
+    width: 60%; /* Make the button smaller */
+    padding: 10px; /* Smaller padding for the button */
+    border: none;
+    border-radius: 8px;
+    background-color: #007bff; /* Blue button */
+    color: #fff;
+    font-size: 14px; /* Slightly smaller text */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    align-self: center; /* Ensure the button is centered */
+}
+
+/* Button hover effect */
+.login-page button.logbtn-primary:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow on hover */
+}
+/*LogIn page (login.html)- end*/
+
+
+/*registration(registration.html) -start*/
+.registration-image {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    line-height: 2;
+    color: #ffffff;
+    background-image: url('../images/register.jpg');
+    opacity: 60;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    display: flex;
+}
+
+.container {
+    display: flex;
+    max-width: 900px;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin-left: 300px;
+    margin-top: 30px;
+    height: 650px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.left-reg {
+    color: rgb(37, 11, 11);
+    padding: 40px;
+    flex: 1;
+    border-radius: 10px;
+}
+
+.left-reg h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.left-reg p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 0.5;
+}
+
+.form-card {
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.registration-image h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #eff3f7;
+}
+
+/* Form Styles */
+.registration-image form {
+    width: 100%;
+    color: rgb(249, 248, 248);
+    font-weight: 500;
+}
+
+.row {
+    display: flex;
+    gap: 20px;
+    height: 80px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.input-group label {
+    margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+}
+
+/* Checkbox Group Styling */
+.checkbox-group {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap; /* Allows checkboxes to wrap if the screen size is too small */
+    margin-bottom: 20px;
+}
+
+.checkbox-group label {
+    font-size: 14px;
+    color: #f9f8f8;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.checkbox-group .checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Ensure the checkbox area takes full width */
+.checkbox-group input[type="checkbox"],
+.checkbox-group label {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.input-group button {
+    padding: 12px; /* Increase padding for a bigger button */
+    margin-top: 20px; /* Add space above the button */
+    margin-left: 60px;
+    width: 70%;
+    color: rgb(255, 255, 255);
+    background-color:#07092d;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+}
+/*registration(registration.html) -End*/
+
+
 /* Courses Page (courses.html) - Start */
 
 .course-heading {
@@ -371,48 +607,117 @@ footer p {
 
 
 /*Contact Us - Start*/
-.card {
-    border-radius: 15px;
-    margin-top: 0;
-    margin-bottom: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card-body img {
-    height: 500px;
-    width: 500px;
-    padding: 20px;
+/*Contact Us - Start*/
+.contact-image {
+   
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    line-height: 2;
+    color: #ffffff; /* White text color for contrast */
+    background-image: url('../images/register.jpg'); /* Apply the background image */
+    opacity: 60;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Ensures the background image stays fixed when scrolling */
+    background-repeat: no-repeat;
+    display: flex;
     
 }
+.contact-container {
+    display: flex;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin-left: 300px;
+    margin-top: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 670px;
+}
 
-#contact-image {
-  object-fit: cover;
+.contact-info {
+    
+    color: white;
+    padding: 40px;
+    flex: 1;
+}
+
+.contact-info h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.contact-info p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.contact-info ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.contact-info ul li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.contact-info .social-icons a {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    margin-right: 15px;
+    color: white;
+    text-decoration: none;
 }
 
 .contact-form {
-    background-color: #ffffff;
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    border-radius: 0 15px 15px 0;
+    padding: 40px;
+    flex: 1;
+    
 }
 
-.form-control{
-    font-size: 1.2em;
-    padding:15px;
-    width:100%;
-    margin-bottom: 15px;
+.contact-form form {
+    display: flex;
+    flex-direction: column;
 }
-h3 {
+
+.contact-form label {
+    margin-bottom: 10px;
     font-weight: bold;
-    color: #333;
-    margin-bottom: 1.5rem;
 }
 
-.btn-dark {
-    background-color: #333;
-    border-color: #333;
+.contact-form input, .contact-form textarea {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
 }
+
+.contact-form textarea {
+    resize: none;
+    height: 150px;
+}
+
+.contact-form button {
+    padding: 15px;
+    background-color:#343dc0;
+    color: rgb(252, 249, 249);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #c1daf6;;
+}
+
+/*Contact us(contactus.html) - end*/
 
 /*Contact us(contactus.html) - end*/
 
@@ -873,5 +1178,19 @@ form button:hover {
 .table-container {
     max-width: 100%;
     overflow-x: auto;
+}
+
+/* Update status enquiry modal*/
+/* Increase the width of the dropdown */
+#statusUpdateModal select {
+    width: 200px; /* Adjust this value as needed */
+    padding: 5px;
+}
+
+/* Optional styling for the modal */
+#statusUpdateModal {
+    background-color: rgba(0, 0, 0, 0.5); /* For a dimmed background */
+    padding: 20px;
+    border-radius: 8px;
 }
 

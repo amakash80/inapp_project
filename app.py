@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, EmailField, SelectField, PasswordField, SelectMultipleField, SubmitField, widgets
+from wtforms import StringField, DateField, EmailField, SelectField, PasswordField, SelectMultipleField, SubmitField, widgets, TextAreaField
 from wtforms.validators import DataRequired, Email, Length, EqualTo,Regexp
 from config import Config  # Make sure to import your Config class
 from flask_login import login_user, LoginManager, logout_user, current_user, login_required
@@ -13,6 +13,11 @@ from datetime import datetime, timezone
 # Initialize the Flask application
 app = Flask(__name__)
 app.config.from_object(Config)
+
+# Ensure the session is non-permanent, so it expires when the browser closes
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_COOKIE_NAME'] = 'your_session_name'
+app.config['SESSION_TYPE'] = 'filesystem'
 
 # Initialize database and migration
 mydb_obj = SQLAlchemy(app)
@@ -81,6 +86,13 @@ class Enquiry(mydb_obj.Model):
     esource = mydb_obj.Column(mydb_obj.String(100), nullable=False)  # Source of enquiry (e.g., "Website", "Referral")
     edate = mydb_obj.Column(mydb_obj.DateTime, default=datetime.now(timezone.utc), nullable=False)  # Automatically store the current date and time
 
+# Contacts model
+class contacts(mydb_obj.Model):
+    __tablename__= 'contact'
+    id = mydb_obj.Column(mydb_obj.Integer, primary_key=True)
+    name = mydb_obj.Column(mydb_obj.String(100))
+    email = mydb_obj.Column(mydb_obj.String(150))
+    message = mydb_obj.Column(mydb_obj.String(500))
 
 #WTForms
 class RegistrationForm(FlaskForm):
@@ -115,6 +127,13 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators = [DataRequired()])
     submit = SubmitField('Login')
 
+# ContactForm
+class ContactForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    message = TextAreaField('Your message', validators=[DataRequired()])
+    submit = SubmitField('Send message')
+
 
 #Login route
 @app.route('/login', methods=['GET', 'POST'])
@@ -127,7 +146,7 @@ def login():
         user = User.query.filter_by(uemail=form.email.data).first()
 
         if user and user.upassword == form.password.data:
-            # Check if the role matches
+             # Check if the role matches
             if role == 'admin' and user.urole != 'admin':
                 flash('You are not authorized to sign in as an admin.', 'danger')
                 return redirect(url_for('login', role='admin'))
@@ -136,8 +155,8 @@ def login():
                 return redirect(url_for('login', role='user'))
             
             # Log in the user
-            login_user(user)
-            session['user_id'] = user.uid
+            login_user(user, remember=False) #remember = False ensures that the session expires
+            # session['user_id'] = user.uid
             flash(f'Welcome {user.uname}!', 'success')
 
             # Redirect to admin or user dashboard based on role
@@ -200,7 +219,12 @@ def register():
 
 @app.route('/')
 def home():
+    if current_user.is_authenticated:
+        # Redirect to dashboard if the user is already logged in
+        return redirect(url_for('user_dashboard'))
+    # Render the home page if not authenticated
     return render_template('home.html')
+
 
 @app.route('/courses')
 def courses():
@@ -210,9 +234,23 @@ def courses():
 def about():
     return render_template('about.html')
 
-@app.route('/contact')
+# Contact route
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template('contact.html')
+    form = ContactForm()
+
+    if form.validate_on_submit():
+        # Handle the form submission
+        con_name = form.name.data
+        con_email = form.email.data
+        con_message = form.message.data
+
+        contact = contacts(name=con_name, email=con_email, message=con_message )
+        mydb_obj.session.add(contact)
+        mydb_obj.session.commit()       
+        flash(f'Thank you, {con_name}. Your message has been sent!')
+        return redirect(url_for('contact'))  # Redirect to the same page after submission
+    return render_template('contact.html', form=form)
 
 #Route for user dashboard
 @app.route('/user-dash')
@@ -329,16 +367,70 @@ def delete_enquiry(enquiry_id):
 
 
 #Route for Admin dashboard
-@app.route('/admin/latest-enquiries')
+@app.route('/latest-enquiries')
 def latest_enquiries():
-    # For now, you're just passing placeholder data to the template
-    # Later you can fetch actual data from your database
-    return render_template('latest-enquiries.html')
+    latest_enquiries = (
+        mydb_obj.session.query(Enquiry)
+        .join(User, Enquiry.user_id == User.uid)
+        .join(Course, Enquiry.course_id == Course.cid)
+        .filter(Enquiry.status_id == 1)  # Assuming 1 is for 'Pending'
+        .order_by(Enquiry.edate.desc())
+        .limit(5)
+        .all()
+    )
+    return render_template('latest-enquiries.html', latest_enquiries=latest_enquiries)
 
-@app.route('/all_enquiries')
-def all_enquiries():
-    # Your logic here
-    return render_template('all_enquiries.html')
+
+#All Enquiries Admin
+@app.route('/admin-all-enquiries', methods=['GET', 'POST'])
+@login_required  # Ensure only admins have access to this route
+def admin_all_enquiries():
+    search = request.args.get('search', '')
+
+    # Construct a query to join the User, Course, Enquiry, and Enquiry Status tables
+    query = mydb_obj.session.query(
+        Enquiry, User, Course, EnquiryStatus
+    ).join(User, Enquiry.user_id == User.uid) \
+     .join(Course, Enquiry.course_id == Course.cid) \
+     .join(EnquiryStatus, Enquiry.status_id == EnquiryStatus.statusid) \
+     .order_by(Enquiry.edate.desc())  # Order by newest to oldest enquiries
+    
+    # Apply search filter (if any)
+    if search:
+        search = f"%{search}%"  # SQL LIKE query pattern
+        query = query.filter(
+            mydb_obj.or_(User.uname.ilike(search), Course.cname.ilike(search))
+        )
+    
+    # Execute the query and get all results
+    enquiries = query.all()
+    
+    # Fetch all enquiry statuses for the status update dropdown
+    enquiry_statuses = EnquiryStatus.query.all()
+
+    return render_template(
+        'admin-all-enquiries.html', 
+        enquiries=enquiries,
+        enquiry_statuses=enquiry_statuses
+    )
+
+#Route to update enquiry status (admin)
+@app.route('/update-enquiry-status', methods=['POST'])
+@login_required  # Ensure only admins have access
+def update_enquiry_status():
+    enquiry_id = request.form.get('enquiry_id')
+    new_status_id = request.form.get('status_id')
+
+    # Fetch the enquiry and update the status
+    enquiry = Enquiry.query.get(enquiry_id)
+    if enquiry:
+        enquiry.status_id = new_status_id
+        mydb_obj.session.commit()
+        flash('Enquiry status updated successfully!', 'success')
+    else:
+        flash('Enquiry not found.', 'error')
+
+    return redirect(url_for('admin_all_enquiries'))
 
 # Route to display all users via admin
 @app.route('/all_users', methods=['GET'])
@@ -528,6 +620,14 @@ def delete_course(course_id):
 def disable_qualifications():
     # Your logic here
     return render_template('disable_qualifications.html')
+
+# Logout route
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()  # Log the user out
+    return redirect(url_for('home'))  # Redirect to homepage or login
+
 
 if __name__ == '__main__':
     app.run(debug=True)
