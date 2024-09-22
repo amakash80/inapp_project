@@ -1,0 +1,30 @@
+{% extends 'admin-dash.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h2>Latest Pending Enquiries</h2>
+<table class="admin-table">
+    <thead>
+        <tr>
+            <th>Enquirer Name</th>
+            <th>Course Name</th>
+            <th>Highest Qualification</th>
+            <th>Marks</th>
+            <th>Graduation Year</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for enquiry in latest_enquiries %}
+        <tr>
+            <td>{{ enquiry.user.uname }}</td>
+            <td>{{ enquiry.course.cname }}</td>
+            <td>{{ enquiry.ehighestqualification }}</td>
+            <td>{{ enquiry.emarks }}</td>
+            <td>{{ enquiry.egraduateyear }}</td>
+            <td>{{ enquiry.edate.strftime('%Y-%m-%d') }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

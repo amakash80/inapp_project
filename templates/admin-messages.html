@@ -1,0 +1,26 @@
+{% extends 'admin-dash.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h2> Messages</h2>
+<table class="admin-table">
+    <thead>
+        <tr>
+            <th> Message-ID </th>
+            <th> Name </th>
+            <th> Email </th>
+            <th> Message </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contact in admin_messages %}
+        <tr>
+            <td>{{ contact.id }}</td>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.email }}</td>
+            <td>{{ contact.message }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

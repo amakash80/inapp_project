@@ -16,7 +16,7 @@
                 <li><strong>Working hours:</strong> 8 a.m. – 8 p.m.</li>
             </ul><br><br>
             <!-- Flash Messages -->
-   <!-- {% with messages = get_flashed_messages(with_categories=True) %}
+     {% with messages = get_flashed_messages(with_categories=True) %}
      {% if messages %}
              {% for category, message in messages %}
                  <div class="alert alert-warning" >
@@ -27,7 +27,7 @@
              {% endfor %}
              
      {% endif %}
- {% endwith %}-->
+ {% endwith %}
         </div>
         
         <div class="contact-form">
@@ -47,4 +47,7 @@
         </div>
     </div>
 </div>
+{% endblock %}
+{% block script %}
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
 {% endblock %}
