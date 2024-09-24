@@ -87,21 +87,21 @@ function closeEditCourseModal() {
     document.getElementById('editCourseModal').style.display = 'none';
 }
 
-function openEditCourseModal(course) {
-    // Populate the form fields with the current course data
-    document.getElementById('editCourseId').value = course.cid;
-    document.getElementById('editCourseName').value = course.coursename;
-    document.getElementById('editCourseDescription').value = course.description;
-    document.getElementById('editCourseDuration').value = course.duration;
-    document.getElementById('editCourseFees').value = course.fee;
+// function openEditCourseModal(course) {
+//     // Populate the form fields with the current course data
+//     document.getElementById('editCourseId').value = course.cid;
+//     document.getElementById('editCourseName').value = course.cname;
+//     document.getElementById('editCourseDescription').value = course.cdescription;
+//     document.getElementById('editCourseDuration').value = course.cduration;
+//     document.getElementById('editCourseFees').value = course.cfees;
 
-    // Open the modal
-    document.getElementById('editCourseModal').style.display = 'block';
-}
+//     // Open the modal
+//     document.getElementById('editCourseModal').style.display = 'block';
+// }
 
-function closeEditCourseModal() {
-    document.getElementById('editCourseModal').style.display = 'none';
-}
+// function closeEditCourseModal() {
+//     document.getElementById('editCourseModal').style.display = 'none';
+// }
 
 function openStatusModal(enquiryId) {
     document.getElementById('enquiry_id').value = enquiryId;

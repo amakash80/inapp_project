@@ -458,6 +458,13 @@ footer p {
     transition: background-color 0.3s ease;
     
 }
+.error {
+    color: rgba(255, 0, 0, 0.442);  /* Error message color */
+    font-size: 0.7em;  /* Smaller font size */
+    margin-top: 30px;   /* Space between the input and the error message */
+    position: absolute;  /* Position it absolutely */
+    font-weight:bold;
+}
 /*registration(registration.html) -End*/
 
 
@@ -520,17 +527,11 @@ footer p {
 }
 
 .enquiry-btn {
-    background-color: #7c677f;
-    color: #fff;
-}
-
-.interested-btn {
     background-color: #9bc400;
     color: #fff;
-    margin-left: 10px;
 }
 
-.enquiry-btn:hover, .interested-btn:hover {
+.enquiry-btn:hover {
     opacity: 0.8;
 }
 
@@ -539,7 +540,6 @@ footer p {
 /*About Us Page (about.html) - Start*/
 /* General Styles */
 .image {
-   
     margin: 0;
     padding: 0;
     line-height: 2;
@@ -569,27 +569,26 @@ footer p {
     font-stretch: expanded;
 }
 
-.about-text, .vision-text, .mission-text {
+.about-text, .vision-text, .mission-text, .history-text {
     color: #ffffff;
 }
 
-.about-text h1, .vision-text h1, .mission-text h1,.history-text h1,.core-values-text h1{
+.about-text h1, .vision-text h1, .mission-text h1, .history-text h1, .core-values-text h1 {
     color: #ffffff;
     font-size: 75px;
     margin-bottom: 20px;
     text-align: center;
-    
 }
 
-.about-text p, .vision-text p, .mission-text p {
+.about-text p, .vision-text p, .mission-text p, .history-text p { /* Added .history-text p */
     font-size: 16px;
     margin-bottom: 20px;
     line-height: 1.5;
-    
+    text-align: justify; /* Apply justification to History section as well */
 }
 
 .about-text button {
-    background-color:  #343dc0;
+    background-color: #343dc0;
     color: #ffffff;
     padding: 10px 20px;
     border: none;
@@ -603,6 +602,7 @@ footer p {
     background-color: #333;
 }
 
+
 /*About Us Page - End*/
 
 
@@ -615,7 +615,7 @@ footer p {
     height: 100vh;
     line-height: 2;
     color: #ffffff; /* White text color for contrast */
-    background-image: url('../images/register.jpg'); /* Apply the background image */
+    background-image: url('../images/contactus.jpg'); /* Apply the background image */
     opacity: 60;
     background-size: cover;
     background-position: center;
@@ -952,6 +952,16 @@ form input {
 }
 
 form button {
+    background-color: #008CBA;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+}
+
+.edit-btn {
     background-color: #008CBA;
     border: none;
     padding: 10px;

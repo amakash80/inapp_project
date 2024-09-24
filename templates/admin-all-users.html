@@ -30,7 +30,7 @@
                 <td>{{ user.ucity }}, {{ user.ustate }}</td>
                 <td>
                     <!-- Edit Button -->
-                    <button onclick="showEditModal('{{ user.uid }}', '{{ user.uname }}', '{{ user.uemail }}', '{{ user.uphone }}', '{{ user.ustate }}', '{{ user.ucity }}')">Edit</button>
+                    <button onclick="showEditModal('{{ user.uid }}', '{{ user.uname }}', '{{ user.uemail }}', '{{ user.uphone }}', '{{ user.ustate }}', '{{ user.ucity }}')" class="edit-btn">Edit</button>
                     <!-- Delete Button -->
                     <form method="POST" action="{{ url_for('delete_user', user_id=user.uid) }}" style="display:inline;" onsubmit="return userConfirmDelete();">
                         <button type="submit">Delete</button>

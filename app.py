@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 from flask_migrate import Migrate
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, EmailField, SelectField, PasswordField, SelectMultipleField, SubmitField, widgets, TextAreaField
@@ -101,7 +102,11 @@ class RegistrationForm(FlaskForm):
     birthday = DateField('Birthday', format='%Y-%m-%d', validators=[DataRequired()])
     gender = SelectField('Gender', choices=[('Male', 'Male'), ('Female', 'Female'), ('Others', 'Others')], validators=[DataRequired()])
     email = EmailField('Email', validators=[DataRequired(), Email()])
-    phone = StringField('Phone Number', validators=[DataRequired()])
+    phone = StringField('Phone Number', 
+                        validators=[
+                            DataRequired(), 
+                            Regexp(r'^\d+$', message='Phone number must be numeric')
+                        ])
     state = StringField('State of Domicile', validators=[DataRequired()])
     city = StringField('City', validators=[DataRequired()])
     
@@ -117,7 +122,7 @@ class RegistrationForm(FlaskForm):
         DataRequired(),
         Length(min=8, max=20),
         Regexp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$', 
-               message="Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.")
+               message="Must contain at least 1 uppercase, lowercase letter, number, and character.")
     ])
     confirmpassword = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     
@@ -230,6 +235,15 @@ def home():
 def courses():
     return render_template('courses.html')
 
+@app.route('/course-enquire')
+def enquire():
+    if current_user.is_authenticated:
+        return redirect(url_for('user_dashboard'))
+    else:
+        # Redirect to the register page if the user is not authenticated
+        return redirect(url_for('register'))
+
+
 @app.route('/about')
 def about():
     return render_template('about.html')
@@ -255,7 +269,7 @@ def contact():
 #Route for user dashboard
 @app.route('/user-dash')
 def user_dashboard():
-    user = current_user  # Fetching the first user for now; later use user-specific queries
+    user = current_user 
     
     # Retrieve qualifications for the user
     qualifications = user.qualifications  # This accesses the related qualifications for the user
@@ -269,25 +283,23 @@ def user_dashboard():
     enabled_courses = Course.query.all() #retrieve all courses from the course table
     return render_template('user-dash.html', user=user, qualifications=qualifications, enabled_courses=enabled_courses, user_enquiries=user_enquiries, enumerate=enumerate)
 
-#User edit profile
+# User edit profile
 @app.route('/update-profile', methods=['POST'])
+@login_required  # This ensures that the user must be logged in
 def update_profile():
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = User.query.get(user_id) #to fetch current user
-        if user:
-            # Update the user details
-            user.uname = request.form.get('name')
-            user.uphone = request.form.get('phone')
-            user.ustate = request.form.get('state')
-            user.ucity = request.form.get('city')
-            mydb_obj.session.commit()
-            flash('Profile updated successfully!', 'success')
-        else:
-            flash('User not found.', 'error')
+    if current_user.is_authenticated:  # Check if user is logged in
+        # Update the user details
+        current_user.uname = request.form.get('name')
+        current_user.uphone = request.form.get('phone')
+        current_user.ustate = request.form.get('state')
+        current_user.ucity = request.form.get('city')
+        mydb_obj.session.commit()
+        flash('Profile updated successfully!', 'success')
     else:
         flash('You need to be logged in to update your profile.', 'error')
+    
     return redirect(url_for('user_dashboard'))
+
 
 #User delete profile
 @app.route('/delete_profile', methods=['POST'])
@@ -585,10 +597,10 @@ def update_course():
     course = Course.query.get_or_404(course_id)
 
     # Get the updated details from the form
-    course.coursename = request.form['cname']
-    course.description = request.form['cdescription']
-    course.duration = request.form['cduration']
-    course.fee = request.form['cfees']
+    course.cname = request.form['cname']
+    course.cdescription = request.form['cdescription']
+    course.cduration = request.form['cduration']
+    course.cfees = request.form['cfees']
 
     # Save changes to the database
     try:
@@ -620,6 +632,14 @@ def delete_course(course_id):
 def disable_qualifications():
     # Your logic here
     return render_template('disable_qualifications.html')
+
+#Route for admin messages
+@app.route('/admin-messages')
+def admin_messages():
+    admin_messages = (
+        mydb_obj.session.query(contacts)
+    )
+    return render_template('admin-messages.html', admin_messages=admin_messages)
 
 # Logout route
 @app.route('/logout')
