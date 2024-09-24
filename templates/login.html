@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}SignIn - SignIn to your account{% endblock %}
+{% block content %}
+<div class="login-page">
+    <form method="POST" action="{{ url_for('login', role=request.args.get('role')) }}">
+        {{ form.hidden_tag() }}
+        <div class="logform-group">
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control") }}
+        </div>
+        <div class="logform-group">
+            {{ form.password.label(class="form-label") }}
+            {{ form.password(class="form-control") }}
+        </div>
+        <button type="submit" class="logbtn logbtn-primary">Sign In</button>
+    </form>
+</div>
+
+{% endblock %}
+{% block script %}
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+{% endblock %}

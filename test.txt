@@ -1,0 +1,28 @@
+@app.route('/update_user', methods=['POST'])
+def update_user():
+    uid = request.form.get('uid')
+    uname = request.form.get('uname')
+    uemail = request.form.get('uemail')
+    uphone = request.form.get('uphone')
+    ustate = request.form.get('ustate')
+    ucity = request.form.get('ucity')
+
+    # Retrieve the user from the database
+    user = User.query.get(uid)
+
+    if user:
+        # Update user details
+        user.uname = uname
+        user.uemail = uemail
+        user.uphone = uphone
+        user.ustate = ustate
+        user.ucity = ucity
+        
+        # Save changes to the database
+        db.session.commit()
+
+        flash('User details updated successfully.')
+    else:
+        flash('User not found.')
+
+    return redirect(url_for('all_users'))

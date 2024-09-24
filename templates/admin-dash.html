@@ -3,19 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Home - Course Inquiry System{% endblock %}</title>
+    <title>{% block title %}Admin Dashboard{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <!-- Header Section -->
     <header>
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Company Logo">
         <nav>
             <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('courses') }}">Courses</a></li>
-                <li><a href="{{ url_for('about') }}">About Us</a></li>
-                <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
                 {% if current_user.is_authenticated %}
                     <li><a href="{{ url_for('logout') }}">Logout</a></li>
                 {% endif %}
@@ -34,14 +29,23 @@
         {% endif %}
     {% endwith %}
 
-    <!-- Main Content Section -->
-    <div class="content">
-        {% block content %}
-        <!-- Content specific to each page goes here -->
-        {% endblock %}
-    </div>
+    <div class="admin-container">
+        <aside class="admin-sidebar">
+            <ul class="admin-menu">
+                <li class="admin-menu-item"><a href="{{ url_for('latest_enquiries') }}">Latest Enquiries</a></li>
+                <li class="admin-menu-item"><a href="{{ url_for('admin_all_enquiries') }}">All Enquiries</a></li>
+                <li class="admin-menu-item"><a href="{{ url_for('all_users') }}">All Users</a></li>
+                <li class="admin-menu-item"><a href="{{ url_for('all_courses') }}">All Courses</a></li>
+                <li class="admin-menu-item"><a href="{{ url_for('admin_messages') }}">Messages</a></li>
+            </ul>
+        </aside>
 
-    <!-- Footer Section -->
+        <main class="admin-content">
+            {% block content %}
+            <!-- Admin dashboard content will be injected here -->
+            {% endblock %}
+        </main>
+    </div>
     <footer>
         <p>&copy; 2024 Mad Education. All rights reserved.</p>
     </footer>

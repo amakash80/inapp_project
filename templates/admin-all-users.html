@@ -1,0 +1,119 @@
+<!-- admin_all_users.html -->
+{% extends "admin-dash.html" %}
+
+{% block title %}All Users{% endblock %}
+
+{% block content %}
+<h1>All Users</h1>
+<form method="GET" action="{{ url_for('all_users') }}">
+    <input type="text" name="search" placeholder="Search by name, email, or phone number" value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+    <button type="button" id="addUserBtn" onclick="showAddUserModal()">Add User</button>
+</form>
+
+<table class="admin-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.uname }}</td>
+                <td>{{ user.uemail }}</td>
+                <td>{{ user.uphone }}</td>
+                <td>{{ user.ucity }}, {{ user.ustate }}</td>
+                <td>
+                    <!-- Edit Button -->
+                    <button onclick="showEditModal('{{ user.uid }}', '{{ user.uname }}', '{{ user.uemail }}', '{{ user.uphone }}', '{{ user.ustate }}', '{{ user.ucity }}')" class="edit-btn">Edit</button>
+                    <!-- Delete Button -->
+                    <form method="POST" action="{{ url_for('delete_user', user_id=user.uid) }}" style="display:inline;" onsubmit="return userConfirmDelete();">
+                        <button type="submit">Delete</button>
+                    </form>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Add User Modal -->
+<div id="addUserModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeAddUserModal()">&times;</span>
+        <h2>Add User</h2>
+        <form id="addUserForm" method="POST" action="{{ url_for('add_user') }}">
+            {{ form.hidden_tag() }}  <!-- For CSRF token -->
+
+            <label for="firstname">First Name:</label>
+            {{ form.firstname(size=32) }}
+
+            <label for="lastname">Last Name:</label>
+            {{ form.lastname(size=32) }}
+
+            <label for="birthday">Birthday:</label>
+            {{ form.birthday() }}
+
+            <label for="gender">Gender:</label>
+            {{ form.gender() }}
+
+            <label for="email">Email:</label>
+            {{ form.email(size=32) }}
+
+            <label for="phone">Phone Number:</label>
+            {{ form.phone(size=32) }}
+
+            <label for="state">State:</label>
+            {{ form.state(size=32) }}
+
+            <label for="city">City:</label>
+            {{ form.city(size=32) }}
+
+            <label for="qualifications">Qualifications:</label>
+            {{ form.qualifications() }}
+
+            <label for="password">Password:</label>
+            {{ form.password(size=32) }}
+
+            <label for="confirmpassword">Confirm Password:</label>
+            {{ form.confirmpassword(size=32) }}
+
+            <button type="submit">Add User</button>
+        </form>
+    </div>
+</div>
+
+<!-- Edit User Modal -->
+<div id="editUserModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+        <h2>Edit User</h2>
+        <form id="editUserForm" method="POST" action="{{ url_for('update_user') }}">
+            <input type="hidden" name="uid" id="editUserId">
+            
+            <label for="editUserName">Name:</label>
+            <input type="text" name="uname" id="editUserName" required>
+
+            <label for="editUserEmail">Email:</label>
+            <input type="email" name="uemail" id="editUserEmail" required>
+
+            <label for="editUserPhoneNumber">Phone Number:</label>
+            <input type="text" name="uphone" id="editUserPhoneNumber" required>
+
+            <label for="editUserState">State:</label>
+            <input type="text" name="ustate" id="editUserState" required>
+
+            <label for="editUserCity">City:</label>
+            <input type="text" name="ucity" id="editUserCity" required>
+
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block script %} <script src="{{ url_for('static', filename='js/admin.js') }}"></script> {% endblock %}
